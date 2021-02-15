@@ -1,47 +1,57 @@
 /*
-let things = require('./things')
-let {someValue} = require('./things')
+// #8 Створення сервера NodeJS
+let http = require('http')
 
-console.log(someValue)
-console.log(things.multiply(5, 10))
-console.log(things.arrayCounter([2, 1, 3, 4, 5]))
+let server = http.createServer((req, res) => {
+    console.log('Page URL: ' + req.url)
+    res.writeHead(200, {'Content-Type': 'text/plain'})
+    res.end('Hello World!!!')
+})
+
+server.listen(3000, '127.0.0.1')
+console.log('Local server started')
+*/
+// =========================================================
+// #9 Робота з потоками
+/*
+let fs = require('fs')
+
+let myReadShort = fs.createReadStream('./article.txt')
+let myWriteShort = fs.createWriteStream('./news.txt')
+
+myReadShort.on('data', (chunk) => {
+    console.log('New data:')
+    myWriteShort.write(chunk)
+})
 */
 // =========================================================
 /*
-let events = require('events')
+// #10 Ф-я pipe() робота з HTML i JSON
+let fs = require('fs')
 
-let myEmit = new events.EventEmitter()
+let myReadShort = fs.createReadStream('./article.txt')
+let myWriteShort = fs.createWriteStream('./news2.txt')
+myReadShort.pipe(myWriteShort)
 
-myEmit.on('some_event', function(text) {
-    console.log(text)
+// myReadShort.on('data', (chunk) => {
+//     console.log('New data:')
+//     myWriteShort.write(chunk)
+// })
+
+let http = require('http')
+
+let server = http.createServer((req, res) => {
+    console.log('Page URL: ' + req.url)
+    res.writeHead(200, { 'Content-Type': 'application/json' })
+    let obj = {
+        model: 'BNW',
+        speed: '234.5',
+        wheels: 4
+    }
+    res.end(JSON.stringify(obj))
 })
 
-myEmit.emit('some_event', 'event start')
+server.listen(3000, '127.0.0.1')
+console.log('Local server started')
 */
 // =========================================================
-let events = require('events')
-let util = require('util')
-
-class Cars {
-    constructor(model) {
-        this.model = model
-    }
-}
-
-util.inherits(Cars, events.EventEmitter)
-
-let bmw = new Cars('БНВ')
-let audi = new Cars('Audi')
-let volvo = new Cars('Volvo')
-
-let cars =[bmw, audi, volvo]
-
-cars.forEach( (car) => {
-    car.on('speed', (text) => {
-        console.log(`${car.model} speed is - ${text}`)
-    })
-})
-
-bmw.emit('speed', '184.5 km/h')
-audi.emit('speed', '284.5 km/h')
-volvo.emit('speed', '84.5 km/h')
