@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body>
+    <%- include('blocks/header.ejs') %>
+    <h1>News Page # <%= newsId %></h1>
+    <h3>This title name is - <%= obj.title %> and id is - <%= obj.id %></h3>
+    <ul>
+        <li>It's a good weather today</li>
+        <li>It's a good weather today</li>
+        <li>It's a good weather today</li>
+        <li>It's a good weather today</li>
+        <li>It's a good weather today</li>
+        <li>It's a good weather today</li>
+        <li>It's a good weather today</li>
+        <li>It's a good weather today</li>
+        <li>It's a good weather today</li>
+        <li>It's a good weather today</li>
+    </ul>
+    
+    <ul>
+        <% obj.paragraphs.forEach((el) => { %>
+            <li> <%= el %></li>
+        <% }) %>
+    </ul>
+
+</body>
+
+</html>
